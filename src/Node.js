@@ -14,6 +14,9 @@ class Node extends React.Component {
 
     async componentDidMount() {
         try {
+            this.setState({
+                isLoading: true,
+            });
             const resRaw = await fetch(this.props.url, { mode: "cors" });
             console.log(resRaw)
             const res = await resRaw.json()
