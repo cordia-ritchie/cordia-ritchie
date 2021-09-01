@@ -9,6 +9,8 @@ class Node extends React.Component {
         this.state = {
             isOk: false,
             isLoading: false,
+            oms: 0,
+            seed: 0,
         };
     }
 
@@ -23,6 +25,7 @@ class Node extends React.Component {
             this.setState({
                 isOk: resRaw.status === 200,
                 oms: res.oms,
+                seed: res.seed,
             });
         } catch (e) {
             message.error(`${this.props.nodeNum} failed ${e}`);
@@ -34,7 +37,7 @@ class Node extends React.Component {
     }
 
     render() {
-        const { isLoading, isOk,oms } = this.state;
+        const { isLoading, isOk, oms, seed } = this.state;
         const { url, nodeNum } = this.props
         if (isLoading) {
             return (
@@ -43,23 +46,26 @@ class Node extends React.Component {
                         {nodeNum}
                     </div>
                     <div className="node-url">
-                        {url }
+                        {url}
                     </div>
                 </div>
             );
         }
         return (
             <div className={classNames('node',
-                isOk?'node__ok':'node__failed',
+                isOk ? 'node__ok' : 'node__failed',
             )}>
                 <div className="node-num">
-                    { nodeNum }
+                    {nodeNum}
                 </div>
                 <div className="node-url">
-                    { url }
+                    {url}
+                </div>
+                <div className="node-seed">
+                    {seed}
                 </div>
                 <div className="node-oms">
-                    { oms }
+                    {oms}
                 </div>
             </div>
         );
